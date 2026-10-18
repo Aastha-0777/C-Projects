@@ -108,7 +108,13 @@ int main()
         printf("7. Exit Program\n");
         printf("------------------------------------------------------------\n");
         printf("Enter your choice (1-7): ");
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1)
+        {
+            int ch;
+            while ((ch = getchar()) != '\n' && ch != EOF)
+                ;        // throw away the bad input
+            choice = -1; // lands in the 'default' message
+        }
 
         switch (choice)
         {
@@ -133,12 +139,7 @@ int main()
             printf("\t3. Sort by Salary\n");
             printf("\t4. Return Back to Main Menu\n");
             printf("\tEnter your choice (1-4): ");
-            if (scanf("%d", &choice) != 1)
-            {
-                int ch;
-                while ((ch = getchar()) != '\n' && ch != EOF);        // throw away the bad input
-                choice = -1; // lands in the 'default' message
-            }
+            scanf("%d", &sortChoice);
 
             switch (sortChoice)
             {
