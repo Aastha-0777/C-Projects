@@ -133,7 +133,12 @@ int main()
             printf("\t3. Sort by Salary\n");
             printf("\t4. Return Back to Main Menu\n");
             printf("\tEnter your choice (1-4): ");
-            scanf("%d", &sortChoice);
+            if (scanf("%d", &choice) != 1)
+            {
+                int ch;
+                while ((ch = getchar()) != '\n' && ch != EOF);        // throw away the bad input
+                choice = -1; // lands in the 'default' message
+            }
 
             switch (sortChoice)
             {
@@ -198,6 +203,12 @@ int getIdxById(int id)
 
 void addNewEmp()
 {
+
+    if (empCounter >= MAX_EMPLOYEES)
+    {
+        printf("The Employee List is Full (max %d). Delete a record first.\n", MAX_EMPLOYEES);
+        return;
+    }
 
     printf("----------- ADD NEW EMPLOYEE -----------\n");
     struct Employee e;
